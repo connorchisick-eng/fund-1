@@ -4,6 +4,7 @@ import { ROSTER, byTeam, initials, FACULTY_ADVISORS } from "@/lib/roster";
 import { ScrollHint } from "@/components/scroll-hint";
 import { LinkedInChip } from "@/components/linkedin-icon";
 import { getSupabaseAdmin } from "@/lib/supabase/server";
+import { nameKeys } from "@/lib/member-name-keys";
 
 export const metadata = { title: "Leadership" };
 export const revalidate = 300;
@@ -22,16 +23,27 @@ async function loadMemberLookup(): Promise<Map<string, MemberLookup>> {
       .select("username, full_name, avatar_path, linkedin_url");
     const map = new Map<string, MemberLookup>();
     (data || []).forEach((r: { full_name: string; username: string; avatar_path: string | null; linkedin_url: string | null }) => {
-      map.set(r.full_name, {
+      const entry: MemberLookup = {
         avatar_path: r.avatar_path,
         username: r.username,
         linkedin_url: r.linkedin_url,
-      });
+      };
+      for (const key of nameKeys(r.full_name)) {
+        if (!map.has(key)) map.set(key, entry);
+      }
     });
     return map;
   } catch {
     return new Map();
   }
+}
+
+function lookupMember(map: Map<string, MemberLookup>, name: string): MemberLookup | undefined {
+  for (const key of nameKeys(name)) {
+    const hit = map.get(key);
+    if (hit) return hit;
+  }
+  return undefined;
 }
 
 function publicAvatarUrl(path: string | null): string | null {
@@ -70,7 +82,7 @@ export default async function LeadershipPage() {
         <SectionLabel eyebrow="Executive Committee" title="Five seats. One mission." />
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {exec.map((m, i) => {
-            const l = lookup.get(m.name);
+            const l = lookupMember(lookup, m.name);
             return (
               <PersonCard
                 key={m.name}
