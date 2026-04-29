@@ -62,7 +62,7 @@ insert into public.members (username, full_name, team, role, is_admin) values
 
   ('david.elman',             'David Elman',                  'Analysts',                  'Analyst',                                                       false),
   ('elaine.wang',             'Elaine Wang',                  'Analysts',                  'Analyst',                                                       false),
-  ('teng.chao',               'Teng Chao (Benny)',            'Analysts',                  'Analyst',                                                       false),
+  ('teng.chao',               'Chao-Hsun (Benny) Teng',       'Analysts',                  'Analyst',                                                       false),
   ('shaneshe',                'Shane Shepherd',               'Faculty Advisors',          'Faculty Advisor · Academic Director, MS in Finance',            true),
   ('altintig',                'Ayca Altintig',                'Faculty Advisors',          'Faculty Advisor · Co-Lead, Women-Led Initiative in Finance',    true)
 on conflict (username) do update

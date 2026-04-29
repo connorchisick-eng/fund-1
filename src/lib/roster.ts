@@ -74,7 +74,7 @@ export const ROSTER: RosterEntry[] = [
 
   { team: "Analysts", name: "David Elman", role: "Analyst" },
   { team: "Analysts", name: "Elaine Wang", role: "Analyst" },
-  { team: "Analysts", name: "Teng Chao (Benny)", role: "Analyst" },
+  { team: "Analysts", name: "Chao-Hsun (Benny) Teng", role: "Analyst" },
 ];
 
 // Lookup by name — used by the Teams page sector lineup to pull LinkedIn URLs
