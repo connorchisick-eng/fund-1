@@ -19,6 +19,10 @@ export type RosterEntry = {
   role: string;
   /** Optional direct LinkedIn profile URL. When empty, the UI links to a LinkedIn people search for this name. */
   linkedin?: string;
+  /** Pinned /m/[username] handle. Set when the seeded DB row's full_name
+   * may have drifted from this entry, so the View-profile link doesn't
+   * disappear. Source of truth for usernames is supabase/02_seed_roster.sql. */
+  username?: string;
 };
 
 export const ROSTER: RosterEntry[] = [
@@ -74,7 +78,7 @@ export const ROSTER: RosterEntry[] = [
 
   { team: "Analysts", name: "David Elman", role: "Analyst" },
   { team: "Analysts", name: "Elaine Wang", role: "Analyst" },
-  { team: "Analysts", name: "Chao-Hsun (Benny) Teng", role: "Analyst" },
+  { team: "Analysts", name: "Chao-Hsun (Benny) Teng", role: "Analyst", username: "teng.chao" },
 ];
 
 // Lookup by name — used by the Teams page sector lineup to pull LinkedIn URLs

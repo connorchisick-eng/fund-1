@@ -91,7 +91,7 @@ export default async function LeadershipPage() {
                 role={m.role}
                 linkedin={l?.linkedin_url || m.linkedin}
                 avatarUrl={publicAvatarUrl(l?.avatar_path ?? null)}
-                username={l?.username}
+                username={l?.username ?? m.username}
               />
             );
           })}

@@ -127,6 +127,8 @@ export function TeamAccordion({
                 <ul className="divide-y hairline border hairline bg-[var(--color-paper)]">
                   {sectorLineup.map((s, i) => {
                     const meta = lookupMeta(memberMeta, s.name);
+                    const rosterEntry = findByName(s.name);
+                    const username = meta?.username ?? rosterEntry?.username;
                     return (
                       <li key={`${s.label}-${i}`} className="px-3 md:px-4 py-3 grid grid-cols-12 gap-3 items-center">
                         <div className="col-span-5 sm:col-span-3">
@@ -136,8 +138,8 @@ export function TeamAccordion({
                         <div className="col-span-7 sm:col-span-6 flex items-center gap-3 min-w-0">
                           <MemberAvatar name={s.name} avatarUrl={meta?.avatar ?? null} />
                           <span className="min-w-0 flex-1">
-                            {meta?.username ? (
-                              <Link href={`/m/${meta.username}`} className="block text-[13px] md:text-sm truncate hover:text-[var(--color-cardinal)]">
+                            {username ? (
+                              <Link href={`/m/${username}`} className="block text-[13px] md:text-sm truncate hover:text-[var(--color-cardinal)]">
                                 {s.name}
                               </Link>
                             ) : (
@@ -147,16 +149,16 @@ export function TeamAccordion({
                           </span>
                         </div>
                         <div className="col-span-12 sm:col-span-3 flex items-center justify-end gap-2">
-                          {meta?.username && (
+                          {username && (
                             <Link
-                              href={`/m/${meta.username}`}
+                              href={`/m/${username}`}
                               className="text-[10px] font-mono uppercase tracking-wider text-[var(--color-cardinal)] border-b border-[var(--color-cardinal)] pb-0.5"
                             >
                               View profile
                             </Link>
                           )}
                           <LinkedInChip
-                            linkedin={findByName(s.name)?.linkedin}
+                            linkedin={rosterEntry?.linkedin}
                             name={s.name}
                           />
                         </div>
@@ -170,12 +172,13 @@ export function TeamAccordion({
                 <ul className="divide-y hairline border hairline bg-[var(--color-paper)]">
                   {members.map((m) => {
                     const meta = lookupMeta(memberMeta, m.name);
+                    const username = meta?.username ?? m.username;
                     return (
                       <li key={m.name} className="px-3 md:px-4 py-3 flex items-center gap-3">
                         <MemberAvatar name={m.name} avatarUrl={meta?.avatar ?? null} />
                         <span className="flex-1 min-w-0">
-                          {meta?.username ? (
-                            <Link href={`/m/${meta.username}`} className="block text-[14px] truncate hover:text-[var(--color-cardinal)]">
+                          {username ? (
+                            <Link href={`/m/${username}`} className="block text-[14px] truncate hover:text-[var(--color-cardinal)]">
                               {m.name}
                             </Link>
                           ) : (
@@ -183,9 +186,9 @@ export function TeamAccordion({
                           )}
                           <span className="block text-[11px] text-[var(--color-muted)] truncate">{m.role}</span>
                         </span>
-                        {meta?.username && (
+                        {username && (
                           <Link
-                            href={`/m/${meta.username}`}
+                            href={`/m/${username}`}
                             className="text-[10px] font-mono uppercase tracking-wider text-[var(--color-cardinal)] border-b border-[var(--color-cardinal)] pb-0.5 shrink-0"
                           >
                             View profile
