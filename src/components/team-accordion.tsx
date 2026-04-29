@@ -8,6 +8,30 @@ import { getSupabaseBrowser } from "@/lib/supabase/client";
 
 type MemberMeta = { avatar: string | null; username: string };
 
+// Roster names and the names stored in the `members` table can drift —
+// e.g. "Teng Chao (Benny)" vs. "Chao-Hsun (Benny) Teng" vs. "Benny Teng".
+// Generate every reasonable lookup key so the View-Profile link doesn't
+// silently disappear when an admin tweaks one source of truth.
+function nameKeys(name: string): string[] {
+  const keys = new Set<string>();
+  const norm = (s: string) => s.toLowerCase().replace(/[^a-z]/g, "");
+  const trimmed = name.replace(/\s+/g, " ").trim();
+  if (!trimmed) return [];
+  keys.add(norm(trimmed));
+  // Without any parenthetical: "Chao-Hsun (Benny) Teng" -> "Chao-Hsun Teng"
+  const stripped = trimmed.replace(/\s*\([^)]*\)\s*/g, " ").replace(/\s+/g, " ").trim();
+  if (stripped) keys.add(norm(stripped));
+  // Parenthetical contents combined with the surrounding tokens.
+  const parens = [...trimmed.matchAll(/\(([^)]+)\)/g)].map((m) => m[1].trim()).filter(Boolean);
+  const rest = stripped.split(/\s+/).filter(Boolean);
+  const lastName = rest[rest.length - 1];
+  for (const p of parens) {
+    if (lastName) keys.add(norm(`${p} ${lastName}`));
+    if (rest.length > 1) keys.add(norm([p, ...rest.slice(1)].join(" ")));
+  }
+  return [...keys];
+}
+
 // Shared cross-accordion cache so every TeamAccordion only fetches once.
 let _memberCache: Map<string, MemberMeta> | null = null;
 async function fetchMemberMetaMap(): Promise<Map<string, MemberMeta>> {
@@ -20,13 +44,26 @@ async function fetchMemberMetaMap(): Promise<Map<string, MemberMeta>> {
   const base = process.env.NEXT_PUBLIC_SUPABASE_URL?.replace(/\/+$/, "");
   const map = new Map<string, MemberMeta>();
   (data || []).forEach((r: { full_name: string; username: string; avatar_path: string | null }) => {
-    map.set(r.full_name, {
+    const meta: MemberMeta = {
       avatar: r.avatar_path && base ? `${base}/storage/v1/object/public/avatars/${r.avatar_path}` : null,
       username: r.username,
-    });
+    };
+    for (const k of nameKeys(r.full_name)) {
+      // First registration wins so two rows that normalize the same don't
+      // overwrite each other.
+      if (!map.has(k)) map.set(k, meta);
+    }
   });
   _memberCache = map;
   return map;
+}
+
+function lookupMeta(map: Map<string, MemberMeta>, name: string): MemberMeta | undefined {
+  for (const k of nameKeys(name)) {
+    const hit = map.get(k);
+    if (hit) return hit;
+  }
+  return undefined;
 }
 
 export function TeamAccordion({
@@ -114,7 +151,7 @@ export function TeamAccordion({
               {sectorLineup ? (
                 <ul className="divide-y hairline border hairline bg-[var(--color-paper)]">
                   {sectorLineup.map((s, i) => {
-                    const meta = memberMeta.get(s.name);
+                    const meta = lookupMeta(memberMeta, s.name);
                     return (
                       <li key={`${s.label}-${i}`} className="px-3 md:px-4 py-3 grid grid-cols-12 gap-3 items-center">
                         <div className="col-span-5 sm:col-span-3">
@@ -157,7 +194,7 @@ export function TeamAccordion({
               ) : (
                 <ul className="divide-y hairline border hairline bg-[var(--color-paper)]">
                   {members.map((m) => {
-                    const meta = memberMeta.get(m.name);
+                    const meta = lookupMeta(memberMeta, m.name);
                     return (
                       <li key={m.name} className="px-3 md:px-4 py-3 flex items-center gap-3">
                         <MemberAvatar name={m.name} avatarUrl={meta?.avatar ?? null} />
