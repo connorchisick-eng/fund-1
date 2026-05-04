@@ -4,7 +4,6 @@ import { KPI } from "@/components/kpi";
 import { PerfChart } from "@/components/perf-chart";
 import { BenchmarkComposition } from "@/components/benchmark-composition";
 import { WeightBars } from "@/components/weight-bars";
-import { PlaceholderBadge, PlaceholderBanner } from "@/components/placeholder-badge";
 import { SEED_SNAPSHOT, formatPct, formatUSD } from "@/lib/portfolio";
 import { ROSTER } from "@/lib/roster";
 
@@ -76,7 +75,6 @@ export default function HomePage() {
               <div className="border hairline bg-[var(--color-paper)]">
                 <div className="flex items-center justify-between px-5 py-3 border-b hairline gap-3">
                   <div className="rule-label">Fund Snapshot</div>
-                  <PlaceholderBadge />
                 </div>
                 <div className="px-5 py-6">
                   <div className="rule-label">Net Asset Value</div>
@@ -126,7 +124,6 @@ export default function HomePage() {
             <span className="inline-block h-px w-8 bg-[var(--color-cardinal)]" />
             Performance summary
           </div>
-          <PlaceholderBadge />
         </div>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-3 pb-12">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-px bg-[var(--color-rule)]">
@@ -170,14 +167,6 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Placeholder banner — pulled out of the beige Performance panel
-          so it sits on the white background above, with clear separation. */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 pt-6 md:pt-10 pb-10 md:pb-14">
-        <PlaceholderBanner
-          body="The NAV curve and every figure below are illustrative until the SMIF Portfolio Tracker is connected to the live feed."
-        />
       </section>
 
       {/* Performance panel */}

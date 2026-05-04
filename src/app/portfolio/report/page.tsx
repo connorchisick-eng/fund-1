@@ -280,10 +280,8 @@ export default async function PortfolioReportPage(
             Trojan SMIF is a student-run investment organization at the USC
             Marshall School of Business. All trades are paper-traded against
             a blended benchmark (60% SPY · 14% AGG · 14% SHY · 8% GLD ·
-            4% DBC) for educational purposes. Figures in this report may
-            reflect placeholder data until the SMIF Portfolio Tracker is
-            connected to the live feed. Nothing herein is investment advice
-            or a solicitation to transact in any security.
+            4% DBC) for educational purposes. Nothing herein is investment
+            advice or a solicitation to transact in any security.
           </p>
           <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-[10px] font-mono uppercase">
             <span>trojansmif.com / portfolio</span>

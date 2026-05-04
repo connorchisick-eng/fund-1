@@ -8,7 +8,6 @@ import { AdminTab } from "@/components/admin-tab";
 import { PitchTab as PitchTabV2 } from "@/components/pitch-tab";
 import { ResearchTab } from "@/components/research-tab";
 import { useSupabaseSession } from "@/lib/supabase/use-session";
-import { PlaceholderBadge, PlaceholderBanner } from "@/components/placeholder-badge";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 import { UpcomingMeetings } from "@/components/upcoming-meetings";
 
@@ -415,11 +414,6 @@ function LiveAnnouncements() {
 function InsightsTab() {
   return (
     <div className="grid grid-cols-12 gap-4 md:gap-6">
-      <div className="col-span-12">
-        <PlaceholderBanner
-          body="Fund snapshot, market pulse, and pipeline stats below are placeholder values. Connect the portfolio tracker and a market-data provider to flip these live."
-        />
-      </div>
       <Card title="Fund snapshot" span="md:col-span-12">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-[var(--color-rule)] border hairline">
           <Metric label="Net Asset Value" value="$1,120,000" />

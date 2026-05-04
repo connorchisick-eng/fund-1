@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { SectionLabel } from "@/components/section-label";
 import { ScrollHint } from "@/components/scroll-hint";
-import { PlaceholderBadge } from "@/components/placeholder-badge";
 import { ResearchRepository } from "@/components/research-repository";
 
 export const metadata = { title: "Research" };
@@ -47,12 +46,7 @@ export default function ResearchPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 sm:px-6 py-12 md:py-16">
-        <div className="flex items-start justify-between gap-4 flex-wrap">
-          <SectionLabel eyebrow="Pipeline" title="Current pitch tracker" />
-          <div className="pt-1 shrink-0">
-            <PlaceholderBadge />
-          </div>
-        </div>
+        <SectionLabel eyebrow="Pipeline" title="Current pitch tracker" />
         <div className="mt-8">
           <ScrollHint />
         </div>

@@ -8,7 +8,6 @@ import { Donut } from "@/components/donut";
 import { WorldClocks } from "@/components/world-clocks";
 import { LiveUpdated } from "@/components/live-updated";
 import { ScrollHint } from "@/components/scroll-hint";
-import { PlaceholderBadge, PlaceholderBanner } from "@/components/placeholder-badge";
 import { ReportButton } from "@/components/report-button";
 import { formatPct, formatUSD, POLICY_LIMITS } from "@/lib/portfolio";
 import { loadSnapshot, sharepointUrl } from "@/lib/live-portfolio";
@@ -46,7 +45,6 @@ export default async function PortfolioPage() {
               </h1>
               <div className="mt-5 flex flex-wrap items-center gap-3">
                 <LiveUpdated asOf={s.asOf} />
-                <PlaceholderBadge />
               </div>
               <p className="mt-6 text-[var(--color-muted)] max-w-2xl leading-relaxed">
                 Position, performance, and risk review synced from the SMIF
@@ -73,13 +71,6 @@ export default async function PortfolioPage() {
               </a>
             </div>
           </div>
-        </div>
-
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 pb-8">
-          <PlaceholderBanner
-            title="Placeholder figures on this entire page"
-            body="NAV, returns, holdings, sector weights, attribution, and compliance checks below are illustrative values seeded from the Fund's template workbook. Real numbers go live the moment the SMIF Portfolio Tracker .xlsx is connected."
-          />
         </div>
 
         {/* World clocks */}
@@ -351,7 +342,7 @@ export default async function PortfolioPage() {
 
       {/* Data source */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 py-12 md:py-16">
-        <div className="border hairline p-8 grid md:grid-cols-3 gap-8">
+        <div className="border hairline p-8 grid md:grid-cols-2 gap-8">
           <div>
             <div className="rule-label">Primary source</div>
             <div className="mt-2 font-[family-name:var(--font-display)] text-2xl">
@@ -374,16 +365,6 @@ export default async function PortfolioPage() {
             >
               Open SharePoint ↗
             </a>
-          </div>
-          <div>
-            <div className="rule-label">Feed</div>
-            <div className="mt-2 font-[family-name:var(--font-display)] text-2xl">
-              /api/portfolio
-            </div>
-            <p className="mt-2 text-sm text-[var(--color-muted)]">
-              Cached 15 minutes. JSON snapshot consumed by this page and the
-              public ticker.
-            </p>
           </div>
         </div>
       </section>
