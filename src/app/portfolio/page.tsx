@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SectionLabel } from "@/components/section-label";
 import { KPI } from "@/components/kpi";
 import { PerfChart } from "@/components/perf-chart";
+import { BenchmarkComposition } from "@/components/benchmark-composition";
 import { WeightBars } from "@/components/weight-bars";
 import { Donut } from "@/components/donut";
 import { WorldClocks } from "@/components/world-clocks";
@@ -105,6 +106,9 @@ export default async function PortfolioPage() {
 
       {/* Performance */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 py-12 md:py-16">
+        <div className="mb-6">
+          <BenchmarkComposition />
+        </div>
         <div className="grid grid-cols-12 gap-6">
           <div className="col-span-12 md:col-span-9">
             <div className="border hairline p-6 md:p-8">
@@ -123,10 +127,10 @@ export default async function PortfolioPage() {
             </div>
           </div>
           <div className="col-span-12 md:col-span-3 grid grid-cols-2 md:grid-cols-1 gap-3">
-            <KPI label="Ann. Return" value={formatPct(s.annualizedReturn, false)} tone="positive" />
+            <KPI label="Period Return" value={formatPct(s.annualizedReturn, false)} tone="positive" />
             <KPI label="Ann. Volatility" value={`${s.annualizedVol.toFixed(2)}%`} />
             <KPI label="Beta vs Blend" value={s.beta.toFixed(2)} />
-            <KPI label="Alpha (ann.)" value={formatPct(s.alpha)} tone="positive" />
+            <KPI label="Alpha vs Blend" value={formatPct(s.alpha)} tone="positive" />
           </div>
         </div>
       </section>

@@ -57,7 +57,10 @@ export const SEED_SNAPSHOT: Snapshot = {
   cashPct: 67.35,
   positions: 24,
   sinceInception: 12.00,
-  annualizedReturn: 41.30,
+  // Fund has < 1 year of track record (inception 2026-01-01). Annualizing
+  // a 4-month return overstates expected forward performance, so we report
+  // Period Return = Since Inception until a full year has passed.
+  annualizedReturn: 12.00,
   annualizedVol: 12.4,
   maxDrawdown: -4.2,
   sharpe: 2.41,

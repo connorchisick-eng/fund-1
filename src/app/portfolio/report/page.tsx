@@ -102,13 +102,42 @@ export default async function PortfolioReportPage(
             <PerfSvg series={series.length ? series : s.navSeries} />
           </div>
           <div className="mt-4 grid grid-cols-6 gap-px bg-black/10 border border-black/10">
-            <Stat label="Ann. Return" value={formatPct(s.annualizedReturn)} tone="pos" />
+            <Stat label="Period Return" value={formatPct(s.annualizedReturn)} tone="pos" />
             <Stat label="Ann. Vol." value={`${s.annualizedVol.toFixed(2)}%`} />
             <Stat label="Beta" value={s.beta.toFixed(2)} />
             <Stat label="Alpha" value={formatPct(s.alpha)} tone="pos" />
             <Stat label="Info Ratio" value={s.informationRatio.toFixed(2)} />
             <Stat label="Tracking Err." value={`${s.trackingError.toFixed(2)}%`} />
           </div>
+        </section>
+
+        {/* Blended benchmark composition */}
+        <section className="mt-8 break-inside-avoid">
+          <SectionHeader>Blended Benchmark Composition</SectionHeader>
+          <table className="mt-4 w-full text-[12px] border-collapse">
+            <thead>
+              <tr className="border-b border-black/30">
+                <Th>Ticker</Th>
+                <Th>Index</Th>
+                <Th align="right">Weight</Th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { ticker: "SPY", name: "S&P 500", weight: 60 },
+                { ticker: "AGG", name: "US Aggregate Bond", weight: 14 },
+                { ticker: "SHY", name: "1–3Y Treasury", weight: 14 },
+                { ticker: "GLD", name: "Gold", weight: 8 },
+                { ticker: "DBC", name: "Diversified Commodities", weight: 4 },
+              ].map((b) => (
+                <tr key={b.ticker} className="border-b border-black/10">
+                  <Td mono>{b.ticker}</Td>
+                  <Td>{b.name}</Td>
+                  <Td align="right" mono>{b.weight}%</Td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </section>
 
         {/* Asset allocation */}

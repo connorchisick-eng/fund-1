@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SectionLabel } from "@/components/section-label";
 import { KPI } from "@/components/kpi";
 import { PerfChart } from "@/components/perf-chart";
+import { BenchmarkComposition } from "@/components/benchmark-composition";
 import { WeightBars } from "@/components/weight-bars";
 import { PlaceholderBadge, PlaceholderBanner } from "@/components/placeholder-badge";
 import { SEED_SNAPSHOT, formatPct, formatUSD } from "@/lib/portfolio";
@@ -131,7 +132,7 @@ export default function HomePage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-px bg-[var(--color-rule)]">
             <Metric label="Starting AUM" value={formatUSD(s.startingAUM)} />
             <Metric label="Current NAV" value={formatUSD(s.nav)} />
-            <Metric label="Annualized Return" value={formatPct(s.annualizedReturn)} tone="positive" />
+            <Metric label="Period Return" value={formatPct(s.annualizedReturn)} tone="positive" />
             <Metric label="Annualized Vol." value={`${s.annualizedVol.toFixed(2)}%`} />
             <Metric label="Alpha vs Blend" value={formatPct(s.alpha)} tone="positive" />
             <Metric label="Info Ratio" value={s.informationRatio.toFixed(2)} />
@@ -191,6 +192,9 @@ export default function HomePage() {
             <Link href="/portfolio" className="text-sm border-b border-[var(--color-ink)] pb-1 hover:text-[var(--color-cardinal)] hover:border-[var(--color-cardinal)]">
               Open full portfolio report →
             </Link>
+          </div>
+          <div className="mb-6">
+            <BenchmarkComposition />
           </div>
           <div className="border hairline bg-[var(--color-paper)] p-6 md:p-8">
             <PerfChart data={s.navSeries.filter((_, i) => i % 3 === 0)} />
