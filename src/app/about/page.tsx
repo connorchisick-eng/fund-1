@@ -54,7 +54,7 @@ export default function AboutPage() {
               k="Mandate"
               v="Diversified, long-only portfolio across US & international equities, fixed income, ETFs, and limited alternatives. No leverage. No short sales. All activity paper-traded."
             />
-            <Card k="Benchmark" v="S&P 500 (SPY) as primary. Asset-class benchmarks approved per sleeve." />
+            <Card k="Benchmark" v="Blended index — 60% SPY · 14% AGG · 14% SHY · 8% GLD · 4% DBC. Asset-class benchmarks approved per sleeve." />
             <Card k="Horizon" v="12–18 month default. Thesis-driven overrides require IC approval." />
           </div>
           <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-px bg-[var(--color-rule)] border hairline">

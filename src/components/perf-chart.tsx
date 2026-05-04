@@ -192,7 +192,7 @@ export function PerfChart({
               <div className="mt-1 flex items-center justify-between gap-4 text-sm">
                 <span className="flex items-center gap-2">
                   <span className="inline-block w-3 h-[2px] border-t border-dashed border-[var(--color-ink-3)]" />
-                  SPY
+                  Blend
                 </span>
                 <span className="font-num">{active.benchmark.toFixed(2)}</span>
               </div>
@@ -221,7 +221,7 @@ export function PerfChart({
         </span>
         <span className="flex items-center gap-2">
           <span className="inline-block w-4 h-[2px] border-t border-dashed border-[var(--color-ink-3)]" />
-          SPY Benchmark
+          Blended Benchmark · 60/14/14/8/4
         </span>
         <span className="hidden sm:inline text-[var(--color-muted)]/70">· Tap/hover to inspect</span>
       </div>

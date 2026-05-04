@@ -19,8 +19,8 @@ export default async function PortfolioReportPage(
   const series = s.navSeries.filter((p) => p.date <= asOf);
   const cut = series.length > 0 ? series[series.length - 1] : s.navSeries[s.navSeries.length - 1];
   const sinceInception = cut ? cut.nav - 100 : s.sinceInception;
-  const spyInception = cut ? cut.benchmark - 100 : 15.1;
-  const excess = sinceInception - spyInception;
+  const benchInception = cut ? cut.benchmark - 100 : 3.6;
+  const excess = sinceInception - benchInception;
 
   const reportTitle = `Portfolio Report as of ${formatDate(asOf)}`;
 
@@ -81,7 +81,7 @@ export default async function PortfolioReportPage(
           <div className="mt-4 grid grid-cols-4 gap-px bg-black/10 border border-black/10">
             <Stat label="Net Asset Value" value={formatUSD(s.nav)} />
             <Stat label="Since Inception" value={formatPct(sinceInception)} tone="pos" />
-            <Stat label="Excess vs SPY" value={formatPct(excess)} tone={excess >= 0 ? "pos" : "neg"} />
+            <Stat label="Excess vs Blend" value={formatPct(excess)} tone={excess >= 0 ? "pos" : "neg"} />
             <Stat label="Positions" value={String(s.positions)} />
             <Stat label="Cash" value={formatUSD(s.cash)} />
             <Stat label="Invested" value={formatUSD(s.invested)} />
@@ -89,7 +89,8 @@ export default async function PortfolioReportPage(
             <Stat label="Max Drawdown" value={formatPct(s.maxDrawdown)} tone="neg" />
           </div>
           <p className="mt-4 text-[13px] leading-relaxed text-black/75 max-w-[6in]">
-            Long-only, multi-asset portfolio benchmarked to SPY. Paper-traded from
+            Long-only, multi-asset portfolio benchmarked to a blended index of
+            60% SPY · 14% AGG · 14% SHY · 8% GLD · 4% DBC. Paper-traded from
             the SMIF Portfolio Tracker. Figures shown as of {formatDate(asOf)}.
           </p>
         </section>
@@ -195,7 +196,7 @@ export default async function PortfolioReportPage(
 
         {/* Top contributors */}
         <section className="mt-8 break-inside-avoid">
-          <SectionHeader>Top Contributors (bps vs SPY)</SectionHeader>
+          <SectionHeader>Top Contributors (bps vs Blend)</SectionHeader>
           <table className="mt-4 w-full text-[12px] border-collapse">
             <thead>
               <tr className="border-b border-black/30">
@@ -249,8 +250,9 @@ export default async function PortfolioReportPage(
           <p className="max-w-[6.5in]">
             Trojan SMIF is a student-run investment organization at the USC
             Marshall School of Business. All trades are paper-traded against
-            the S&amp;P 500 for educational purposes. Figures in this report
-            may reflect placeholder data until the SMIF Portfolio Tracker is
+            a blended benchmark (60% SPY · 14% AGG · 14% SHY · 8% GLD ·
+            4% DBC) for educational purposes. Figures in this report may
+            reflect placeholder data until the SMIF Portfolio Tracker is
             connected to the live feed. Nothing herein is investment advice
             or a solicitation to transact in any security.
           </p>
@@ -359,7 +361,7 @@ function PerfSvg({ series }: { series: { date: string; nav: number; benchmark: n
         <line x1={8} x2={20} y1={13} y2={13} stroke="#990000" strokeWidth={1.8} />
         <text x={26} y={16} fontSize={10} fontFamily="monospace" fill="#0a0a0b">Fund</text>
         <line x1={8} x2={20} y1={26} y2={26} stroke="#16161a" strokeDasharray="3 3" strokeWidth={1.2} />
-        <text x={26} y={29} fontSize={10} fontFamily="monospace" fill="#0a0a0b">SPY</text>
+        <text x={26} y={29} fontSize={10} fontFamily="monospace" fill="#0a0a0b">Blend</text>
       </g>
     </svg>
   );

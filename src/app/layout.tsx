@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Trojan SMIF — USC Marshall Student Managed Investment Fund",
     description:
-      "An MSF-led investment fund at USC Marshall managing a long-only, multi-asset portfolio benchmarked to the S&P 500.",
+      "An MSF-led investment fund at USC Marshall managing a long-only, multi-asset portfolio benchmarked to a blended 60% SPY · 14% AGG · 14% SHY · 8% GLD · 4% DBC index.",
     type: "website",
   },
 };

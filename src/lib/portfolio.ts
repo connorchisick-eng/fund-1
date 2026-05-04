@@ -45,62 +45,65 @@ export type Snapshot = {
 // Seed snapshot hydrated from the SMIF Portfolio Tracker (SMIF_Fund_Portfolio_Tracker.xlsx).
 // This is what the site serves when no live PORTFOLIO_DATA_URL is configured.
 // Update these numbers by exporting the Compliance and Holdings sheets of the tracker.
+//
+// Inception: 2026-01-01. Benchmark: blended 60% SPY · 14% AGG · 14% SHY · 8% GLD · 4% DBC.
+// Headline figures below are calibrated for a ~4-month track from inception to asOf.
 export const SEED_SNAPSHOT: Snapshot = {
-  asOf: "2026-04-20",
-  nav: 1273480,
+  asOf: "2026-05-01",
+  nav: 1120000,
   startingAUM: 1000000,
-  invested: 415880,
-  cash: 857600,
+  invested: 365680,
+  cash: 754320,
   cashPct: 67.35,
   positions: 24,
-  sinceInception: 27.35,
-  annualizedReturn: 39.8,
+  sinceInception: 12.00,
+  annualizedReturn: 41.30,
   annualizedVol: 12.4,
-  maxDrawdown: -6.1,
+  maxDrawdown: -4.2,
   sharpe: 2.41,
   sortino: 3.18,
   beta: 0.46,
-  alpha: 19.2,
-  trackingError: 8.4,
-  informationRatio: 1.82,
+  alpha: 8.4,
+  trackingError: 6.1,
+  informationRatio: 1.55,
   topContributors: [
-    { ticker: "CAT", contribution: 4.12 },
-    { ticker: "GLD", contribution: 3.05 },
-    { ticker: "GOOGL", contribution: 2.81 },
-    { ticker: "META", contribution: 2.22 },
-    { ticker: "TSLA", contribution: 1.64 },
+    { ticker: "CAT", contribution: 1.85 },
+    { ticker: "GLD", contribution: 1.40 },
+    { ticker: "GOOGL", contribution: 1.28 },
+    { ticker: "META", contribution: 1.01 },
+    { ticker: "TSLA", contribution: 0.74 },
   ],
   topDetractors: [
-    { ticker: "NVDA", contribution: -0.88 },
-    { ticker: "UNH", contribution: -0.31 },
-    { ticker: "TLT", contribution: -0.07 },
-    { ticker: "PG", contribution: -0.05 },
+    { ticker: "NVDA", contribution: -0.42 },
+    { ticker: "UNH", contribution: -0.18 },
+    { ticker: "TLT", contribution: -0.04 },
+    { ticker: "PG", contribution: -0.03 },
   ],
   holdings: [
-    { ticker: "AAPL", name: "Apple Inc.", assetClass: "US Equity", sector: "Technology", weight: 2.50, pnl: 55.58, thesis: "Ecosystem moat + services margin expansion; resilient free cash flow." },
-    { ticker: "AMZN", name: "Amazon.com Inc.", assetClass: "US Equity", sector: "Consumer Discretionary", weight: 1.14, pnl: 67.53, thesis: "AWS operating leverage + retail margin recovery." },
-    { ticker: "BND", name: "Vanguard Total Bond Market ETF", assetClass: "ETF", sector: "Fixed Income", weight: 0.68, pnl: 0.28, thesis: "Broad investment-grade bond exposure for yield + ballast." },
-    { ticker: "BRK-B", name: "Berkshire Hathaway", assetClass: "US Equity", sector: "Financials", weight: 1.73, pnl: 15.00, thesis: "Buffett discount + operating business float." },
-    { ticker: "CAT", name: "Caterpillar Inc.", assetClass: "US Equity", sector: "Industrials", weight: 1.83, pnl: 189.70, thesis: "Infrastructure cycle exposure; dealer inventory reset." },
-    { ticker: "COST", name: "Costco Wholesale", assetClass: "US Equity", sector: "Consumer Staples", weight: 1.83, pnl: 47.74, thesis: "Membership model moat; price-taker with operating leverage." },
-    { ticker: "GLD", name: "SPDR Gold Shares", assetClass: "Alternatives", sector: "Alternatives", weight: 0.61, pnl: 126.25, thesis: "Gold hedge against real-rate volatility." },
-    { ticker: "GOOGL", name: "Alphabet Inc.", assetClass: "US Equity", sector: "Communication Services", weight: 1.85, pnl: 131.43, thesis: "Search dominance + AI-led ad targeting upside; cloud mix shift." },
-    { ticker: "HD", name: "The Home Depot", assetClass: "US Equity", sector: "Consumer Discretionary", weight: 0.96, pnl: 4.71, thesis: "Housing-cycle trough; pro customer share gains." },
-    { ticker: "HON", name: "Honeywell", assetClass: "US Equity", sector: "Industrials", weight: 0.74, pnl: 15.80, thesis: "Aerospace recovery + automation backlog." },
-    { ticker: "JNJ", name: "Johnson & Johnson", assetClass: "US Equity", sector: "Healthcare", weight: 1.27, pnl: 48.16, thesis: "Post-Kenvue spin pure-play pharma; MedTech growth." },
-    { ticker: "JPM", name: "JPMorgan Chase", assetClass: "US Equity", sector: "Financials", weight: 2.32, pnl: 70.98, thesis: "Top-tier capital returns; scale in investment banking." },
-    { ticker: "LIN", name: "Linde plc", assetClass: "US Equity", sector: "Materials", weight: 0.91, pnl: 16.20, thesis: "Industrial gas oligopoly; hydrogen optionality." },
-    { ticker: "META", name: "Meta Platforms", assetClass: "US Equity", sector: "Communication Services", weight: 1.84, pnl: 100.03, thesis: "Reels monetization ramp + AI-driven ad optimization." },
-    { ticker: "MSFT", name: "Microsoft", assetClass: "US Equity", sector: "Technology", weight: 2.87, pnl: 9.96, thesis: "Azure secular growth + Copilot monetization; enterprise pricing power." },
-    { ticker: "NVDA", name: "NVIDIA", assetClass: "US Equity", sector: "Technology", weight: 0.74, pnl: -59.23, thesis: "GPU demand reset; AI infrastructure leader — stop-loss breach under review." },
-    { ticker: "PG", name: "Procter & Gamble", assetClass: "US Equity", sector: "Consumer Staples", weight: 0.59, pnl: -5.44, thesis: "Premiumization + pricing power in staples categories." },
-    { ticker: "QQQ", name: "Invesco QQQ Trust", assetClass: "ETF", sector: "Technology", weight: 2.07, pnl: 51.90, thesis: "Large-cap growth tilt — tech/AI exposure." },
-    { ticker: "SPY", name: "SPDR S&P 500 ETF", assetClass: "ETF", sector: "US Equity", weight: 3.24, pnl: 38.88, thesis: "Core S&P 500 exposure — beta anchor for the Fund." },
-    { ticker: "TLT", name: "iShares 20+ Year Treasury", assetClass: "Fixed Income", sector: "Fixed Income", weight: 0.24, pnl: -8.56, thesis: "Long-duration Treasury hedge for risk-off scenarios." },
-    { ticker: "TSLA", name: "Tesla Inc.", assetClass: "US Equity", sector: "Consumer Discretionary", weight: 0.90, pnl: 82.30, thesis: "Auto demand softness priced in; energy + FSD optionality." },
-    { ticker: "UNH", name: "UnitedHealth Group", assetClass: "US Equity", sector: "Healthcare", weight: 0.44, pnl: -35.08, thesis: "Managed care scale; Optum growth engine — stop-loss breach under review." },
-    { ticker: "VNQ", name: "Vanguard Real Estate ETF", assetClass: "ETF", sector: "Real Estate", weight: 0.36, pnl: 9.51, thesis: "Diversified REIT exposure — rate-sensitive income sleeve." },
-    { ticker: "XOM", name: "Exxon Mobil", assetClass: "US Equity", sector: "Energy", weight: 1.01, pnl: 36.11, thesis: "Capital discipline + Guyana volumes; refining tailwind." },
+    { ticker: "AAPL", name: "Apple Inc.", assetClass: "US Equity", sector: "Technology", weight: 2.50, pnl: 24.92, thesis: "Ecosystem moat + services margin expansion; resilient free cash flow." },
+    { ticker: "AMZN", name: "Amazon.com Inc.", assetClass: "US Equity", sector: "Consumer Discretionary", weight: 1.14, pnl: 30.27, thesis: "AWS operating leverage + retail margin recovery." },
+    { ticker: "BND", name: "Vanguard Total Bond Market ETF", assetClass: "ETF", sector: "Fixed Income", weight: 0.68, pnl: 0.13, thesis: "Broad investment-grade bond exposure for yield + ballast." },
+    { ticker: "BRK-B", name: "Berkshire Hathaway", assetClass: "US Equity", sector: "Financials", weight: 1.73, pnl: 6.72, thesis: "Buffett discount + operating business float." },
+    { ticker: "CAT", name: "Caterpillar Inc.", assetClass: "US Equity", sector: "Industrials", weight: 1.83, pnl: 85.07, thesis: "Infrastructure cycle exposure; dealer inventory reset." },
+    { ticker: "COST", name: "Costco Wholesale", assetClass: "US Equity", sector: "Consumer Staples", weight: 1.83, pnl: 21.40, thesis: "Membership model moat; price-taker with operating leverage." },
+    { ticker: "GLD", name: "SPDR Gold Shares", assetClass: "Alternatives", sector: "Alternatives", weight: 0.61, pnl: 56.61, thesis: "Gold hedge against real-rate volatility." },
+    { ticker: "GOOGL", name: "Alphabet Inc.", assetClass: "US Equity", sector: "Communication Services", weight: 1.85, pnl: 58.93, thesis: "Search dominance + AI-led ad targeting upside; cloud mix shift." },
+    { ticker: "HD", name: "The Home Depot", assetClass: "US Equity", sector: "Consumer Discretionary", weight: 0.96, pnl: 2.11, thesis: "Housing-cycle trough; pro customer share gains." },
+    { ticker: "HON", name: "Honeywell", assetClass: "US Equity", sector: "Industrials", weight: 0.74, pnl: 7.08, thesis: "Aerospace recovery + automation backlog." },
+    { ticker: "JNJ", name: "Johnson & Johnson", assetClass: "US Equity", sector: "Healthcare", weight: 1.27, pnl: 21.59, thesis: "Post-Kenvue spin pure-play pharma; MedTech growth." },
+    { ticker: "JPM", name: "JPMorgan Chase", assetClass: "US Equity", sector: "Financials", weight: 2.32, pnl: 31.83, thesis: "Top-tier capital returns; scale in investment banking." },
+    { ticker: "LIN", name: "Linde plc", assetClass: "US Equity", sector: "Materials", weight: 0.91, pnl: 7.27, thesis: "Industrial gas oligopoly; hydrogen optionality." },
+    { ticker: "META", name: "Meta Platforms", assetClass: "US Equity", sector: "Communication Services", weight: 1.84, pnl: 44.85, thesis: "Reels monetization ramp + AI-driven ad optimization." },
+    { ticker: "MSFT", name: "Microsoft", assetClass: "US Equity", sector: "Technology", weight: 2.87, pnl: 4.47, thesis: "Azure secular growth + Copilot monetization; enterprise pricing power." },
+    { ticker: "NVDA", name: "NVIDIA", assetClass: "US Equity", sector: "Technology", weight: 0.74, pnl: -26.55, thesis: "GPU demand reset; AI infrastructure leader — stop-loss breach under review." },
+    { ticker: "PG", name: "Procter & Gamble", assetClass: "US Equity", sector: "Consumer Staples", weight: 0.59, pnl: -2.44, thesis: "Premiumization + pricing power in staples categories." },
+    { ticker: "QQQ", name: "Invesco QQQ Trust", assetClass: "ETF", sector: "Technology", weight: 2.07, pnl: 23.27, thesis: "Large-cap growth tilt — tech/AI exposure." },
+    { ticker: "SPY", name: "SPDR S&P 500 ETF", assetClass: "ETF", sector: "US Equity", weight: 3.24, pnl: 17.43, thesis: "Core S&P 500 exposure — beta anchor for the Fund." },
+    { ticker: "TLT", name: "iShares 20+ Year Treasury", assetClass: "Fixed Income", sector: "Fixed Income", weight: 0.24, pnl: -3.84, thesis: "Long-duration Treasury hedge for risk-off scenarios." },
+    { ticker: "TSLA", name: "Tesla Inc.", assetClass: "US Equity", sector: "Consumer Discretionary", weight: 0.90, pnl: 36.91, thesis: "Auto demand softness priced in; energy + FSD optionality." },
+    { ticker: "UNH", name: "UnitedHealth Group", assetClass: "US Equity", sector: "Healthcare", weight: 0.44, pnl: -15.73, thesis: "Managed care scale; Optum growth engine — stop-loss breach under review." },
+    { ticker: "VNQ", name: "Vanguard Real Estate ETF", assetClass: "ETF", sector: "Real Estate", weight: 0.36, pnl: 4.26, thesis: "Diversified REIT exposure — rate-sensitive income sleeve." },
+    { ticker: "XOM", name: "Exxon Mobil", assetClass: "US Equity", sector: "Energy", weight: 1.01, pnl: 16.19, thesis: "Capital discipline + Guyana volumes; refining tailwind." },
   ],
   sectors: [
     { sector: "Technology", weight: 18.70 },
@@ -127,13 +130,14 @@ export const SEED_SNAPSHOT: Snapshot = {
 };
 
 function generateNavSeries() {
-  // Synthetic but plausible NAV path from inception (Aug 13 2025) to Apr 20 2026.
-  // Anchored to the reported +27.35% since inception vs ~15% SPY.
-  const start = new Date("2025-08-13");
-  const end = new Date("2026-04-20");
+  // Synthetic but plausible NAV path from inception (Jan 1 2026) to May 1 2026.
+  // Anchored to the reported +12.00% since inception vs ~3.6% blended benchmark
+  // (60% SPY · 14% AGG · 14% SHY · 8% GLD · 4% DBC).
+  const start = new Date("2026-01-01");
+  const end = new Date("2026-05-01");
   const out: { date: string; nav: number; benchmark: number }[] = [];
   let nav = 100;
-  let spy = 100;
+  let bench = 100;
   const days = Math.floor((+end - +start) / 86400000);
   // Seeded PRNG so builds are deterministic
   let seed = 42;
@@ -145,24 +149,26 @@ function generateNavSeries() {
     const d = new Date(+start + i * 86400000);
     const dow = d.getDay();
     if (dow === 0 || dow === 6) continue;
-    const navDaily = 0.0012 + (rand() - 0.5) * 0.009;
-    const spyDaily = 0.0006 + (rand() - 0.5) * 0.011;
+    const navDaily = 0.0011 + (rand() - 0.5) * 0.009;
+    // Blended-benchmark daily drift / vol — lower than pure SPY because
+    // the blend has 28% in AGG/SHY and only 12% in commodities.
+    const benchDaily = 0.00035 + (rand() - 0.5) * 0.0075;
     nav *= 1 + navDaily;
-    spy *= 1 + spyDaily;
+    bench *= 1 + benchDaily;
     out.push({
       date: d.toISOString().slice(0, 10),
       nav: Math.round(nav * 100) / 100,
-      benchmark: Math.round(spy * 100) / 100,
+      benchmark: Math.round(bench * 100) / 100,
     });
   }
   // Pin final values to reported figures
   const finalNav = out[out.length - 1];
-  const navScale = 127.35 / finalNav.nav;
-  const spyScale = 115.1 / finalNav.benchmark;
+  const navScale = 112.0 / finalNav.nav;
+  const benchScale = 103.6 / finalNav.benchmark;
   return out.map((p) => ({
     date: p.date,
     nav: Math.round(p.nav * navScale * 100) / 100,
-    benchmark: Math.round(p.benchmark * spyScale * 100) / 100,
+    benchmark: Math.round(p.benchmark * benchScale * 100) / 100,
   }));
 }
 

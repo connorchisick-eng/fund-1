@@ -26,7 +26,8 @@ const assetColors: Record<string, string> = {
 
 export default async function PortfolioPage() {
   const s = await loadSnapshot();
-  const excess = s.sinceInception - 15.1;
+  const lastBench = s.navSeries[s.navSeries.length - 1]?.benchmark ?? 100;
+  const excess = s.sinceInception - (lastBench - 100);
 
   return (
     <>
@@ -48,8 +49,9 @@ export default async function PortfolioPage() {
               </div>
               <p className="mt-6 text-[var(--color-muted)] max-w-2xl leading-relaxed">
                 Position, performance, and risk review synced from the SMIF
-                Portfolio Tracker. Benchmark: SPY. Base currency: USD.
-                Long-only. All activity paper-traded.
+                Portfolio Tracker. Benchmark: 60% SPY · 14% AGG · 14% SHY ·
+                8% GLD · 4% DBC. Base currency: USD. Long-only. All activity
+                paper-traded.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
@@ -92,7 +94,7 @@ export default async function PortfolioPage() {
             <LightKPI
               k="Since Inception"
               v={formatPct(s.sinceInception)}
-              sub={`vs SPY ${formatPct(excess)}`}
+              sub={`vs Blend ${formatPct(excess)}`}
               tone="positive"
             />
             <LightKPI k="Sharpe Ratio" v={s.sharpe.toFixed(2)} sub={`Sortino ${s.sortino.toFixed(2)}`} />
@@ -108,7 +110,7 @@ export default async function PortfolioPage() {
             <div className="border hairline p-6 md:p-8">
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <div className="rule-label">Portfolio vs SPY</div>
+                  <div className="rule-label">Portfolio vs Blended Benchmark</div>
                   <div className="mt-1 font-[family-name:var(--font-display)] text-2xl">
                     Indexed NAV · 100 at inception
                   </div>
@@ -123,7 +125,7 @@ export default async function PortfolioPage() {
           <div className="col-span-12 md:col-span-3 grid grid-cols-2 md:grid-cols-1 gap-3">
             <KPI label="Ann. Return" value={formatPct(s.annualizedReturn, false)} tone="positive" />
             <KPI label="Ann. Volatility" value={`${s.annualizedVol.toFixed(2)}%`} />
-            <KPI label="Beta vs SPY" value={s.beta.toFixed(2)} />
+            <KPI label="Beta vs Blend" value={s.beta.toFixed(2)} />
             <KPI label="Alpha (ann.)" value={formatPct(s.alpha)} tone="positive" />
           </div>
         </div>

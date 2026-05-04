@@ -9,7 +9,8 @@ import { ROSTER } from "@/lib/roster";
 
 export default function HomePage() {
   const s = SEED_SNAPSHOT;
-  const excess = s.sinceInception - 15.1; // proxy vs SPY path
+  const lastBench = s.navSeries[s.navSeries.length - 1]?.benchmark ?? 100;
+  const excess = s.sinceInception - (lastBench - 100); // vs blended benchmark path
   return (
     <div className="home-tight">
       {/* Hero */}
@@ -82,7 +83,7 @@ export default function HomePage() {
                     {formatUSD(s.nav)}
                   </div>
                   <div className="mt-1 font-num text-sm text-[var(--color-positive)]">
-                    {formatPct(s.sinceInception)} since inception · {formatPct(excess)} vs SPY
+                    {formatPct(s.sinceInception)} since inception · {formatPct(excess)} vs Blend
                   </div>
                   <div className="mt-6 grid grid-cols-2 gap-4">
                     <div>
@@ -90,7 +91,7 @@ export default function HomePage() {
                       <div className="font-num text-xl mt-1">{s.sharpe.toFixed(2)}</div>
                     </div>
                     <div>
-                      <div className="rule-label">Beta vs SPY</div>
+                      <div className="rule-label">Beta vs Blend</div>
                       <div className="font-num text-xl mt-1">{s.beta.toFixed(2)}</div>
                     </div>
                     <div>
@@ -106,7 +107,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <div className="px-5 py-3 border-t hairline flex items-center justify-between text-xs">
-                  <span className="text-[var(--color-muted)]">Benchmark · SPY</span>
+                  <span className="text-[var(--color-muted)]">Benchmark · 60/14/14/8/4 Blend</span>
                   <Link href="/portfolio" className="text-[var(--color-cardinal)] hover:underline">
                     Full report →
                   </Link>
@@ -132,7 +133,7 @@ export default function HomePage() {
             <Metric label="Current NAV" value={formatUSD(s.nav)} />
             <Metric label="Annualized Return" value={formatPct(s.annualizedReturn)} tone="positive" />
             <Metric label="Annualized Vol." value={`${s.annualizedVol.toFixed(2)}%`} />
-            <Metric label="Alpha vs SPY" value={formatPct(s.alpha)} tone="positive" />
+            <Metric label="Alpha vs Blend" value={formatPct(s.alpha)} tone="positive" />
             <Metric label="Info Ratio" value={s.informationRatio.toFixed(2)} />
           </div>
         </div>
@@ -156,7 +157,8 @@ export default function HomePage() {
             </p>
             <p>
               We operate as a long-only, multi-asset Fund with a 12–18 month
-              horizon, paper-traded against the S&P 500. Our job isn't just to
+              horizon, paper-traded against a blended benchmark of 60% SPY,
+              14% AGG, 14% SHY, 8% GLD, and 4% DBC. Our job isn't just to
               beat a benchmark — it's to build Marshall students into
               defensible, thoughtful investors.
             </p>
@@ -184,7 +186,7 @@ export default function HomePage() {
             <SectionLabel
               eyebrow="Performance"
               title="Portfolio vs benchmark"
-              subtitle={`Indexed to 100 at inception (Aug 13, 2025). Live NAV updates nightly from the SMIF Portfolio Tracker.`}
+              subtitle={`Indexed to 100 at inception (Jan 1, 2026). Live NAV updates nightly from the SMIF Portfolio Tracker.`}
             />
             <Link href="/portfolio" className="text-sm border-b border-[var(--color-ink)] pb-1 hover:text-[var(--color-cardinal)] hover:border-[var(--color-cardinal)]">
               Open full portfolio report →

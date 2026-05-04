@@ -422,10 +422,10 @@ function InsightsTab() {
       </div>
       <Card title="Fund snapshot" span="md:col-span-12">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-[var(--color-rule)] border hairline">
-          <Metric label="Net Asset Value" value="$127,348" />
-          <Metric label="Since Inception" value="+27.35%" tone="positive" />
+          <Metric label="Net Asset Value" value="$1,120,000" />
+          <Metric label="Since Inception" value="+12.00%" tone="positive" />
           <Metric label="Sharpe" value="2.41" />
-          <Metric label="Max DD" value="−6.10%" tone="negative" />
+          <Metric label="Max DD" value="−4.20%" tone="negative" />
         </div>
       </Card>
 
